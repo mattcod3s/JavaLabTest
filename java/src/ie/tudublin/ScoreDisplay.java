@@ -11,9 +11,11 @@ import processing.core.PApplet;
 public class ScoreDisplay extends PApplet
 {
 	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B2c2d2";
-	Stack<String> nums = new Stack<String>();
+	String score = "D2E2F2G2A2B";
+	//String score = "F2GBDAGEc";
+	Stack<Integer> nums = new Stack<Integer>();
 	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
+	int counter = 1;
 	
 	public void settings()
 	{
@@ -28,41 +30,41 @@ public class ScoreDisplay extends PApplet
 	public void setup() 
 	{
 		String str[] = score.split("");
-		String charInNum;
+		int charInNum;
 		List<String> al = new ArrayList<String>();
 		al = Arrays.asList(str);
-		for(String s: al){
-			System.out.println(s);
-			switch (s) {
+		for(int n = 0; n < score.length(); n++){
+			System.out.println(str[n]);
+			switch (str[n]) {
 				case "D":
-					charInNum = "0";
+					charInNum = 0;
 					break;
 				case "E":
-					charInNum = "1";
+					charInNum = 1;
 					break;
 				case "F":
-					charInNum = "2";
+					charInNum = 2;
 					break;
 				case "G":
-					charInNum = "3";
+					charInNum = 3;
 					break;
 				case "A":
-					charInNum = "4";
+					charInNum = 4;
 					break;
 				case "B":
-					charInNum = "5";
+					charInNum = 5;
 					break;
 				case "c":
-					charInNum = "6";
+					charInNum = 6;
 					break;
 				case "d":
-					charInNum = "7";
+					charInNum = 7;
 					break;
 				case "2":
-					charInNum = "-1";
+					charInNum = nums.get(n-1);
 					break;
 				default:
-					charInNum = "10";
+					charInNum = 10;
 					break;
 			}
 			nums.push(charInNum);
@@ -95,50 +97,60 @@ public class ScoreDisplay extends PApplet
 	void drawNotes()
 	{
 		String str[] = score.split("");
-		String charInNum;
+		int charInNum;
 		List<String> al = new ArrayList<String>();
 		al = Arrays.asList(str);
-		for(String s: al){
-			System.out.println(s);
-			switch (s) {
+		for(int n = 0; n < score.length(); n++){
+			switch (str[n]) {
 				case "D":
-					charInNum = "0";
+					charInNum = 0;
 					break;
 				case "E":
-					charInNum = "1";
+					charInNum = 1;
 					break;
 				case "F":
-					charInNum = "2";
+					charInNum = 2;
 					break;
 				case "G":
-					charInNum = "3";
+					charInNum = 3;
 					break;
 				case "A":
-					charInNum = "4";
+					charInNum = 4;
 					break;
 				case "B":
-					charInNum = "5";
+					charInNum = 5;
 					break;
 				case "c":
-					charInNum = "6";
+					charInNum = 6;
 					break;
 				case "d":
-					charInNum = "7";
+					charInNum = 7;
 					break;
 				case "2":
-					charInNum = "-1";
+					charInNum = nums.get(n-1);
+					circle((100 + ((nums.indexOf(charInNum) + 1) * 80)), (-25 * (charInNum)) + 425, 50);
+					line(125 + ((nums.indexOf(charInNum) + 1) * 80) ,(-25 * (charInNum)) + 425, 125 + ((nums.indexOf(charInNum) + 1) * 80), ((-25 * (charInNum)) + 425) - 80);
 					break;
 				default:
-					charInNum = "10";
+					charInNum = 10;
 					break;
 			}
 			nums.push(charInNum);
-		}
-
-		fill(0,0,0);
-		stroke(0);
-		for(int m = 0; m < score.length(); m++) {
-			circle(56 * m + 50, 46, 55);
+			if (
+				mouseX > (100 + (nums.indexOf(charInNum) * 80)) - 25 
+				&& mouseX < (100 + (nums.indexOf(charInNum) * 80)) + 25 
+				&& mouseY > ((-25 * charInNum) + 425) - 25
+				&& mouseY < ((-25 * charInNum) + 425) + 25
+				
+			) {
+				fill(255, 0, 0);
+				stroke(255, 0, 0);
+			} else {
+				fill(0,0,0);
+				stroke(0);
+			}
+			circle(100 + (nums.indexOf(charInNum) * 80), (-25 * charInNum) + 425, 50);
+			line(125 + (nums.indexOf(charInNum) * 80) ,(-25 * charInNum) + 425, 125 + (nums.indexOf(charInNum) * 80), ((-25 * charInNum) + 425) - 80);
 		}
 	}
 }
