@@ -3,6 +3,7 @@ package ie.tudublin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.io.Console;
 import java.util.*;
 
 
@@ -10,8 +11,8 @@ import processing.core.PApplet;
 
 public class ScoreDisplay extends PApplet
 {
-	//String score = "DEFGABcd";
-	String score = "D2E2F2G2A2B";
+	String score = "DEFGABcd";
+	//String score = "D2E2F2G2A2B";
 	//String score = "F2GBDAGEc";
 	Stack<Integer> nums = new Stack<Integer>();
 	//String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
@@ -29,7 +30,16 @@ public class ScoreDisplay extends PApplet
 
 	public void setup() 
 	{
+		//Tried to clean it
+		 String cleanUp[] = score.split("");
+		 for(int i = 0; i < score.length(); i++) {
+			System.out.println("Stack Elements: " + nums);
+		}
+		
 		String str[] = score.split("");
+
+		//Score Output
+		
 		int charInNum;
 		List<String> al = new ArrayList<String>();
 		al = Arrays.asList(str);
@@ -61,6 +71,7 @@ public class ScoreDisplay extends PApplet
 					charInNum = 7;
 					break;
 				case "2":
+
 					charInNum = nums.get(n-1);
 					break;
 				default:
@@ -91,10 +102,10 @@ public class ScoreDisplay extends PApplet
 			line(40, (j * 50) + 200, 960, (j * 50) + 200);
 		}
 
-		drawNotes();
+		Notes();
 	}
 
-	void drawNotes()
+	void Notes()
 	{
 		String str[] = score.split("");
 		int charInNum;
@@ -127,7 +138,8 @@ public class ScoreDisplay extends PApplet
 					charInNum = 7;
 					break;
 				case "2":
-					charInNum = nums.get(n-1);
+					int temp = nums.get(n-1);
+					charInNum = temp;
 					circle((100 + ((nums.indexOf(charInNum) + 1) * 80)), (-25 * (charInNum)) + 425, 50);
 					line(125 + ((nums.indexOf(charInNum) + 1) * 80) ,(-25 * (charInNum)) + 425, 125 + ((nums.indexOf(charInNum) + 1) * 80), ((-25 * (charInNum)) + 425) - 80);
 					break;
